@@ -5,10 +5,10 @@ namespace Bibliotheek.Classes
     public static class DatabaseConnection
     {
         // Database vars 
-        private const string MysqlDatabase = "db66164";
-        private const string MysqlPassword = "mmMjAw";
-        private const string MysqlServer = "145.118.4.13";
-        private const string MysqlUsername = "66164";
+        private const string MysqlDatabase   = "db71989";
+        private const string MysqlPassword   = "usbw";
+        private const string MysqlServer     = "192.178.1.15";
+        private const string MysqlUsername   = "root";
 
         // <summary>
         // Close a database connection 
