@@ -50,3 +50,27 @@
     width:100%;
     background-color:darkgrey;
 }
+#login-form table{
+    margin-top:10px;
+    border-top:1px solid grey;
+}
+#login-form table tr td{
+    padding:4px;
+}
+#login-form table tr td .error{
+    color:white;
+    background-color:red;
+}
+.input {
+    display: block;
+    width: 100%;
+    min-height: 22px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+h1 {
+    font-size:22px;
+    color:grey;
+    margin-bottom:8px;
+}

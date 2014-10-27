@@ -1,0 +1,28 @@
+﻿@model Bibliotheek.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h1>Login</h1>
+<p>Log hieronder in met de gegevens die verstrekt zijn tijdens het aanmaken van uw account.</p>
+@using (Html.BeginForm("Login", "Account",
+    new { ViewBag.ReturnUrl },
+    FormMethod.Post, new { @id = "login-form", @class = "row" }))
+{
+    <table>
+        @if (null != @ViewBag.Error) { 
+            <tr class="error">
+                <td colspan="2">@ViewBag.Error</td>
+            </tr>
+        }
+        <tr>
+            <td>@Html.LabelFor(model => model.Email)</td><td>@Html.EditorFor(model => model.Email, new { @class = "input" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Password)</td><td>@Html.EditorFor(model => model.Password, new { @class = "input" })</td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" name="Login" value="Inloggen"/></td>
+        </tr>
+    </table>
+}

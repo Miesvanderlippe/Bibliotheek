@@ -1,0 +1,24 @@
+﻿@model Bibliotheek.Models.UserModel
+@{
+    ViewBag.Title = "Add a user";
+}
+
+<h1>Toevoegen</h1>
+<p>Voeg een gebruiker toe aan het systeem.</p>
+@using (Html.BeginForm("Login", "Account",
+    new { ViewBag.ReturnUrl },
+    FormMethod.Post, new { @id = "login-form", @class = "row" }))
+{
+    <table>
+        <tr><td>@Html.Raw(ViewBag.ModelStateIsValid) </td></tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Email)</td><td>@Html.EditorFor(model => model.Email, new { @class = "input" })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Password)</td><td>@Html.EditorFor(model => model.Password, new { @class = "input" })</td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" name="Login" value="Inloggen"/></td>
+        </tr>
+    </table>
+}

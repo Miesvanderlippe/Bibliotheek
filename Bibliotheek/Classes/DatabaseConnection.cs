@@ -7,8 +7,10 @@ namespace Bibliotheek.Classes
         // Database vars 
         private const string MysqlDatabase   = "db71989";
         private const string MysqlPassword   = "usbw";
-        private const string MysqlServer     = "192.178.1.15";
+        private const string MysqlServer     = "localhost";
         private const string MysqlUsername   = "root";
+        private const string MysqlPort       = "3307";
+        // LET OP!! MYSQL POORT IS OP SCHOOL 1 POORT LAGER!
 
         // <summary>
         // Close a database connection 
@@ -23,7 +25,7 @@ namespace Bibliotheek.Classes
         // </summary>
         public static MySqlConnection DatabaseConnect()
         {
-            const string connectionString = "Server=" + MysqlServer + ";Port=3306;Database="
+            const string connectionString = "Server=" + MysqlServer + ";Port=" + MysqlPort + ";Database="
             + MysqlDatabase + ";Uid=" + MysqlUsername +
             ";Pwd=" + MysqlPassword;
 
