@@ -1,0 +1,22 @@
+﻿@using Bibliotheek.Models
+@{
+    ViewBag.Title = "Bibliotheek";
+    var bookInfo = BookModel.GetRecentBooks();
+}
+
+<h1>Welkom op het bibliotheek gedeelte van de website</h1>
+<p>Hier kunt u ons assortiment bekijken en informatie inzien over de boeken, auteurs en uitgevers.</p>
+<h2>Recente boeken : </h2>
+<table>
+@for (var i = 1; i <= bookInfo.Count / 4; i++)
+{
+<tr>
+    <td>
+        @Html.ActionLink(bookInfo[i * 4 - 4], "Book", "Library", new { id = bookInfo[i * 4 - 3] }, null)
+    </td>
+    <td>
+        @Html.ActionLink(bookInfo[i * 4 - 1], "Author", "Library", new { id = bookInfo[i * 4 - 2] }, null)
+    </td>
+</tr>
+}
+</table>

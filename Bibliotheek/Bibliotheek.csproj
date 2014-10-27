@@ -119,11 +119,13 @@
     <Compile Include="Classes\SqlInjection.cs" />
     <Compile Include="Classes\StringManipulation.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BiebController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bieb\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -169,6 +170,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Overview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Library\Issue.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Library\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Library\Author.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Library\Book.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

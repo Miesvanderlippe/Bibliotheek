@@ -12,7 +12,8 @@ namespace Bibliotheek
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute("Auteur", "Library/Author/{id}", new { controller = "Library", action = "Author", id = UrlParameter.Optional });
+            routes.MapRoute("Boek", "Library/Book/{id}", new { controller = "Library", action = "Book", id = UrlParameter.Optional });
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
