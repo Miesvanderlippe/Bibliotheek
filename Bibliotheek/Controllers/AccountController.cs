@@ -15,7 +15,13 @@ namespace Bibliotheek.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (UserModel.CurrentUserLoggedIn)
+            {
+                return RedirectToAction("Overview", "Account");
+            }
+            else {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         //
@@ -68,8 +74,8 @@ namespace Bibliotheek.Controllers
         public ActionResult AddUser() {
             
             if (!UserModel.IsAdmin)
-                return RedirectToAction("Index", "Home");
-            @ViewBag.MySQLError = "123";
+                return RedirectToAction("Login", "Account");
+
             return View();
         }
 
@@ -79,7 +85,7 @@ namespace Bibliotheek.Controllers
         public ActionResult AddUser(UserModel model)
         {
             if(!UserModel.IsAdmin)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             
             if(ModelState.IsValid){
                 model.AddAccount();
