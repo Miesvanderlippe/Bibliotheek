@@ -1,0 +1,25 @@
+﻿@model Bibliotheek.Models.IssueModel
+@{
+    ViewBag.Title = "Inleveren";
+}
+<h1>Inleveren</h1>
+<p>Gebruik de (ontbrekende) barcode scanner om uw boek te scannen. Als dit niet kan vul dan de code van het boek handmatig in. Let op dat dit onze code is en niet de ISBN</p>
+
+@using (Html.BeginForm("Return", "Library",
+    new { ViewBag.ReturnUrl },
+    FormMethod.Post, new { @id = "return-form", @class = "row" }))
+{
+    <table>
+        @if (null != @ViewBag.Error) { 
+            <tr class="error">
+                <td colspan="2">@ViewBag.Error</td>
+            </tr>
+        }
+        <tr>
+            <td>@Html.LabelFor(model => model.Identifier)</td><td>@Html.EditorFor(model => model.Identifier, new { @class = "input" })</td>
+        </tr>
+        <tr>
+            <td></td><td><input type="submit" name="Issue" value="Neem mee!"/></td>
+        </tr>
+    </table>
+}

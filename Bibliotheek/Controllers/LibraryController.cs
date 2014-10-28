@@ -53,9 +53,35 @@ namespace Bibliotheek.Controllers
                 return RedirectToAction("Index", "Library");
 
             if (model.Issue())
-                @ViewBag.Message = "Veel leesplezier";
+                @ViewBag.Error = "Veel leesplezier";
             else
-                @ViewBag.Message = "Er is helaas iets fout gegaan, probeer het opnieuw.";
+                @ViewBag.Error = "Er is helaas iets fout gegaan, probeer het opnieuw.";
+
+            return View();
+        }
+
+        //
+        // GET: /Library/Return
+        public ActionResult Return()
+        {
+            if (!UserModel.CurrentUserLoggedIn)
+                return RedirectToAction("Index", "Library");
+
+            return View();
+        }
+
+        //
+        // POST: /Library/Return
+        [HttpPost]
+        public ActionResult Return(IssueModel model)
+        {
+            if (!UserModel.CurrentUserLoggedIn)
+                return RedirectToAction("Index", "Library");
+
+            if (model.Return())
+                @ViewBag.Error = "Dankjewel";
+            else
+                @ViewBag.Error = "Er is helaas iets fout gegaan, probeer het opnieuw.";
 
             return View();
         }

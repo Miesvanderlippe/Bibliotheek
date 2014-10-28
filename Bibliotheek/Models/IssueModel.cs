@@ -54,5 +54,42 @@ namespace Bibliotheek.Models
                 }
             }
         }
+
+        public bool Return()
+        {
+            const string insertStatement = "UPDATE boeken " +
+                                            "SET " +
+                                            "IssuedAt = ? ," +
+                                            "IssuedTo = 0 " +
+                                            "WHERE ID = ? ";
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
+                {
+                    // Bind parameters 
+                    insertCommand.Parameters.Add("IssuedAt", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"); ;
+                    insertCommand.Parameters.Add("ID", MySqlDbType.VarChar).Value = Identifier;
+
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command 
+                        var test = insertCommand.ToString();
+                        insertCommand.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        // MySqlException bail out
+                        return false;
+                    }
+                    finally
+                    {
+                        // Make sure to close the connection 
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+        }
     }
 }

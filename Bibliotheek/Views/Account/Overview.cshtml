@@ -5,3 +5,12 @@
 <h1>Gebruiker : @ViewBag.Name</h1>
 <p>Hieronder vind u informatie over uw account waaronder geleende boeken en uitstaande boetes.</p>
 <p>Volgens ons systeem bent u een @ViewBag.Role</p>
+<h1>Acties :</h1>
+<ul>
+    <li><a href="/Account/Logout">Loguit</a></li>
+    <li><a href="/Library/Issue">Boek meenemen</a></li>
+    <li><a href="/Library/Return">Boek terugbrengen</a></li>
+    @if(@ViewBag.Role == "Administrator"){
+        <li><a href="/Account/AddUser">Gebruiker toevoegen</a></li>
+    }
+</ul>
