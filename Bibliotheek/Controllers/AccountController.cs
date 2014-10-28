@@ -58,8 +58,8 @@ namespace Bibliotheek.Controllers
 
             if (!UserModel.CurrentUserLoggedIn)
                 return RedirectToAction("Login", "Account");
-
-            @ViewBag.Name = model.CurrentUser();
+            var name = model.CurrentUser();
+            @ViewBag.Name = name;
 
             @ViewBag.Role = "Gebruiker";
             if (UserModel.IsAdmin)

@@ -56,7 +56,7 @@ namespace Bibliotheek.Models
                             }
                         }
                     }
-                    catch (MySqlException ex)
+                    catch (MySqlException)
                     {
                         return list;
                     }

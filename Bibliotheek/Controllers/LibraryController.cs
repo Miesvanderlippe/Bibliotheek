@@ -31,13 +31,14 @@ namespace Bibliotheek.Controllers
         public ActionResult Author(int id)
         {
             @ViewBag.AuthorID = id.ToString();
+
             return View();
         }
 
         //
         // GET: /Library/Issue
         public ActionResult Issue() {
-            if (!UserModel.IsAdmin)
+            if (!UserModel.CurrentUserLoggedIn)
                 return RedirectToAction("Index", "Library");
 
             return View();
@@ -46,10 +47,15 @@ namespace Bibliotheek.Controllers
         //
         // POST: /Library/Issue
         [HttpPost]
-        public ActionResult Issue(BookModel model)
+        public ActionResult Issue(IssueModel model)
         {
-            if (!UserModel.IsAdmin)
+            if (!UserModel.CurrentUserLoggedIn)
                 return RedirectToAction("Index", "Library");
+
+            if (model.Issue())
+                @ViewBag.Message = "Veel leesplezier";
+            else
+                @ViewBag.Message = "Er is helaas iets fout gegaan, probeer het opnieuw.";
 
             return View();
         }
