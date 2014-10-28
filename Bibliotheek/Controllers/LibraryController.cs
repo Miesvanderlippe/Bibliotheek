@@ -16,6 +16,12 @@ namespace Bibliotheek.Controllers
         {
             return View();
         }
+        //
+        // GET: /Library/Overview
+        public ActionResult Overview()
+        {
+            return View();
+        }
         
         //
         // GET: /Library/Book

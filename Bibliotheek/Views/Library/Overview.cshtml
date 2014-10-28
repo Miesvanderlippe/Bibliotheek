@@ -1,0 +1,29 @@
+﻿@using Bibliotheek.Models
+@{
+    ViewBag.Title = "Overzicht";
+    var Books = BookModel.GetAllBooks();
+}
+
+<h1>Alle boeken : </h1>
+<table>
+@for (var i = 1; i <= Books.Count / 5; i++)
+{
+<tr>
+    <td>
+        @Html.ActionLink(Books[i * 5 - 5], "Book", "Library", new { id = Books[i * 5 - 3] }, null)
+    </td>
+    <td>
+        @Html.ActionLink(Books[i * 5 - 1], "Author", "Library", new { id = Books[i * 5 - 2] }, null)
+    </td>
+    @{
+    string dagen = Books[i * 5 - 3];
+        if (dagen.AsInt() > 0)
+        {
+            <td>In huis</td>
+        }else{
+            <td>Niet in huis</td>
+        }
+    }
+</tr>
+}
+</table>
