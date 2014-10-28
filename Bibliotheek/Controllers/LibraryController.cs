@@ -52,6 +52,16 @@ namespace Bibliotheek.Controllers
             if (!UserModel.CurrentUserLoggedIn)
                 return RedirectToAction("Index", "Library");
 
+            List<String> BooksInPosession = IssueModel.BooksInPosession();
+
+            int count = BooksInPosession.Count();
+            count = count / 3;
+            if (count > 6)
+            {
+                @ViewBag.Error = "U heeft al teveel boeken in uw bezit";
+                return View();
+            }
+
             if (model.Issue())
                 @ViewBag.Error = "Veel leesplezier";
             else
