@@ -39,12 +39,20 @@ namespace Bibliotheek.Models
             }
         }
 
-        public string CurrentUser() {
+        public static string CurrentUserName() {
+            var user = HttpContext.Current.User.Identity as FormsIdentity;
+            var ticket = user.Name;
+            return ticket.ToString();
+        }
+
+        public string CurrentUserID()
+        {
             var user = HttpContext.Current.User.Identity as FormsIdentity;
             var ticket = user.Ticket;
             var id = ticket.UserData.Split('|')[0];
             return id.ToString();
         }
+
 
         public bool AddAccount()
         {

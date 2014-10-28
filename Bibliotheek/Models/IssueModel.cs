@@ -34,7 +34,7 @@ namespace Bibliotheek.Models
                 {
                     try
                     {
-                        var userID = model.CurrentUser();
+                        var userID = model.CurrentUserID();
                         // Bind parameters 
                         readCommand.Parameters.Add("IssuedTo", MySqlDbType.VarChar).Value = userID;
 
@@ -73,7 +73,7 @@ namespace Bibliotheek.Models
             {
                 using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
                 {
-                    var name = model.CurrentUser();
+                    var name = model.CurrentUserID();
                     // Bind parameters 
                     insertCommand.Parameters.Add("IssuedAt", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"); ;
                     insertCommand.Parameters.Add("IssuedTo", MySqlDbType.VarChar).Value = name;

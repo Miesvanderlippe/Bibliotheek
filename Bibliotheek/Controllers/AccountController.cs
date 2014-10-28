@@ -54,11 +54,11 @@ namespace Bibliotheek.Controllers
 
         //
         // GET: /Account/Overview
-        public ActionResult Overview(UserModel model) {
+        public ActionResult Overview() {
 
             if (!UserModel.CurrentUserLoggedIn)
                 return RedirectToAction("Login", "Account");
-            var name = model.CurrentUser();
+            var name = UserModel.CurrentUserName();
             @ViewBag.Name = name;
 
             @ViewBag.Role = "Gebruiker";
