@@ -36,7 +36,7 @@ namespace Bibliotheek.Models
         {
             var list = new List<String>();
 
-            const string readStatement = "SELECT DISTINCT isbn.Naam, isbn.ISBN, auteurs.ID AS autorID, CONCAT(auteurs.Voornaam, ' ' ,auteurs.Achternaam) as AutorName FROM `boeken`LEFT JOIN isbn ON boeken.ISBN = isbn.ISBN LEFT JOIN auteurs ON isbn.Auteur = auteurs.ID ORDER BY boeken.DateAdded LIMIT 0 , 5";
+            const string readStatement = "SELECT DISTINCT isbn.Naam, boeken.ID, auteurs.ID AS autorID, CONCAT(auteurs.Voornaam, ' ' ,auteurs.Achternaam) as AutorName FROM `boeken`LEFT JOIN isbn ON boeken.ISBN = isbn.ISBN LEFT JOIN auteurs ON isbn.Auteur = auteurs.ID ORDER BY boeken.DateAdded LIMIT 0 , 5";
 
             using (var empConnection = DatabaseConnection.DatabaseConnect())
             {
