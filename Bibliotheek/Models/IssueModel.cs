@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,51 @@ namespace Bibliotheek.Models
         [Required(ErrorMessage = "Uniek nummer is verplicht")]
         [DataType(DataType.Text)]
         public string Identifier { get; set; }
+        
+        public static List<String> BooksInPosession() {
+            var list = new List<String>();
+            var model = new UserModel();
+
+            const string readStatement = "SELECT boeken.ID, ISBN.Naam, DATEDIFF( CURRENT_TIMESTAMP( ) , boeken.IssuedAt ) AS Difference "+
+                                        "FROM `boeken` "+
+                                        "LEFT JOIN isbn ON boeken.ISBN = isbn.ISBN " +
+                                        "WHERE IssuedTo = ? "+
+                                        "ORDER BY boeken.IssuedAt " +
+                                        "LIMIT 0 , 10";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var readCommand = new MySqlCommand(readStatement, empConnection))
+                {
+                    try
+                    {
+                        var userID = model.CurrentUser();
+                        // Bind parameters 
+                        readCommand.Parameters.Add("IssuedTo", MySqlDbType.VarChar).Value = userID;
+
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        using (var myDataReader = readCommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                list.Add((myDataReader[0] == DBNull.Value ? "?" : myDataReader.GetString(0)));
+                                list.Add((myDataReader[1] == DBNull.Value ? "?" : myDataReader.GetString(1)));
+                                list.Add((myDataReader[2] == DBNull.Value ? "?" : myDataReader.GetString(2)));
+                            }
+                        }
+                    }
+                    catch (MySqlException ex)
+                    {
+                        return list;
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return list;
+        }
 
         public bool Issue() {
             var model = new UserModel();

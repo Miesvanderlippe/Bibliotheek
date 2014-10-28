@@ -1,6 +1,7 @@
-﻿@model Bibliotheek.Models.UserModel
+﻿@using Bibliotheek.Models
 @{
     ViewBag.Title = "Account overview";
+    var Books = IssueModel.BooksInPosession();
 }
 <h1>Gebruiker : @ViewBag.Name</h1>
 <p>Hieronder vind u informatie over uw account waaronder geleende boeken en uitstaande boetes.</p>
@@ -14,3 +15,26 @@
         <li><a href="/Account/AddUser">Gebruiker toevoegen</a></li>
     }
 </ul>
+
+<h1>Geleende boeken : </h1>
+<table>
+@for (var i = 1; i <= Books.Count / 3; i++)
+{
+<tr>
+    <td>
+        @Html.ActionLink(Books[i * 3 - 2], "Book", "Library", new { id = Books[i * 3 - 3] }, null)
+    </td>
+    <td>Dagin in bezit @{ WriteLiteral(Books[i * 3 - 1]); }</td>
+    @{
+    string dagen = Books[i * 3 - 1];
+        if (dagen.AsInt() > 21)
+        {
+            <td>Te laat </td>
+            <td>Boete : </td><td>Eu @{int DagenTelaat = dagen.AsInt() - 21; double Boetebedrag = DagenTelaat * 0.25; WriteLiteral(Boetebedrag);}</td>
+        }else{
+            <td>Niet te laat</td>
+        }
+    }
+</tr>
+}
+</table>
