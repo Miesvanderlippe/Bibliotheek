@@ -3,30 +3,32 @@
     ViewBag.Title = "Boek details";
     var Details = BookModel.GetBookDetails(@ViewBag.BookID);
 }
+@if(Details.Count > 0){
 <h1>Hier kunt u details over een boek vinden</h1>
 
 <p>Details voor @Details[1]</p>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Naam</th>
-        <th>Genre</th>
-        <th>Plaatsing</th>
-    </tr>
-<tr>
-    <td>
-        @Details[0]
-    </td>
-    <td>
-        @Details[1]
-    </td>
-    <td>
-        @Details[2]
-    </td>
-    <td>
-        @Details[3]
-    </td>
-           
-</tr>
-
-</table>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>Genre</th>
+            <th>Plaatsing</th>
+        </tr>
+        <tr>
+            <td>
+                @Details[0]
+            </td>
+            <td>
+                @Details[1]
+            </td>
+            <td>
+                @Details[2]
+            </td>
+            <td>
+                @Details[3]
+            </td>
+        </tr>
+    </table>
+}else{
+    <p>Geen boek gevonden met die barcode</p>
+}
