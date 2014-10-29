@@ -7,22 +7,26 @@
 
 <p>Details voor @Details[1]</p>
 <table>
-    @for (var i = 1; i <= Details.Count / 4; i++)
-    {
-        <tr>
-            <td>
-                @Details[i * 4 - 4]
-            </td>
-            <td>
-                @Details[i * 4 - 3]
-            </td>
-            <td>
-                @Details[i * 4 - 2]
-            </td>
-            <td>
-                @Details[i * 4 - 1]
-            </td>
+    <tr>
+        <th>ID</th>
+        <th>Naam</th>
+        <th>Genre</th>
+        <th>Plaatsing</th>
+    </tr>
+<tr>
+    <td>
+        @Details[0]
+    </td>
+    <td>
+        @Details[1]
+    </td>
+    <td>
+        @Details[2]
+    </td>
+    <td>
+        @Details[3]
+    </td>
            
-        </tr>
-    }
+</tr>
+
 </table>
