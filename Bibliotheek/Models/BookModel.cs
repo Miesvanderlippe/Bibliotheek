@@ -33,7 +33,7 @@ namespace Bibliotheek.Models
 
             var list = new List<String>();
 
-            const string readStatement = "SELECT boeken.ID, isbn.Naam, genres.Genre, locaties.Location " +
+            const string readStatement = "SELECT boeken.ID, isbn.Naam, genres.Genre, locaties.Location, uitgevers.Naam AS Uitgever, uitgevers.Land " +
                                         "FROM `boeken` " +
                                         "LEFT JOIN isbn " +
                                         "ON boeken.ISBN = isbn.ISBN " +
@@ -41,6 +41,8 @@ namespace Bibliotheek.Models
                                         "ON isbn.Genre = genres.ID " +
                                         "LEFT JOIN locaties " +
                                         "ON boeken.Location = locaties.ID " +
+                                        "LEFT JOIN uitgevers "+
+                                        "ON isbn.Uitgever = uitgevers.ID "+
                                         "WHERE boeken.ID = ?";
 
             using (var empConnection = DatabaseConnection.DatabaseConnect())
@@ -59,10 +61,12 @@ namespace Bibliotheek.Models
                                 list.Add((myDataReader[1] == DBNull.Value ? "?" : myDataReader.GetString(1)));
                                 list.Add((myDataReader[2] == DBNull.Value ? "?" : myDataReader.GetString(2)));
                                 list.Add((myDataReader[3] == DBNull.Value ? "?" : myDataReader.GetString(3)));
+                                list.Add((myDataReader[4] == DBNull.Value ? "?" : myDataReader.GetString(4)));
+                                list.Add((myDataReader[5] == DBNull.Value ? "?" : myDataReader.GetString(5)));
                             }
                         }
                     }
-                    catch (MySqlException)
+                    catch (MySqlException ex)
                     {
                         return list;
                     }
