@@ -1,7 +1,28 @@
-﻿@{
-    ViewBag.Title = "Boek";
+﻿@using Bibliotheek.Models
+@{
+    ViewBag.Title = "Boek details";
+    var Details = BookModel.GetBookDetails(@ViewBag.BookID);
 }
-
 <h1>Hier kunt u details over een boek vinden</h1>
 
-<p>@ViewBag.BookID</p>
+<p>Details voor @Details[1]</p>
+<table>
+    @for (var i = 1; i <= Details.Count / 4; i++)
+    {
+        <tr>
+            <td>
+                @Details[i * 4 - 4]
+            </td>
+            <td>
+                @Details[i * 4 - 3]
+            </td>
+            <td>
+                @Details[i * 4 - 2]
+            </td>
+            <td>
+                @Details[i * 4 - 1]
+            </td>
+           
+        </tr>
+    }
+</table>

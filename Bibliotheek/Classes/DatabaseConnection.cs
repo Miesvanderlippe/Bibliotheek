@@ -6,10 +6,10 @@ namespace Bibliotheek.Classes
     {
         // Database vars 
         private const string MysqlDatabase   = "db71989";
-        private const string MysqlPassword   = "usbw";
-        private const string MysqlServer     = "localhost";
-        private const string MysqlUsername   = "root";
-        private const string MysqlPort       = "3307";
+        private const string MysqlPassword   = "CdjbNT";
+        private const string MysqlServer     = "145.118.4.13";
+        private const string MysqlUsername   = "71989";
+        private const string MysqlPort       = "3306";
         // LET OP!! MYSQL POORT IS OP SCHOOL 1 POORT LAGER!
 
         // <summary>

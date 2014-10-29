@@ -29,6 +29,52 @@ namespace Bibliotheek.Models
         [DataType(DataType.Text)]
         public string Publisher { get; set; }
 
+        public static List<String> GetBookDetails(string ID) {
+
+            var list = new List<String>();
+
+            const string readStatement = "SELECT boeken.ID, isbn.Naam, genres.Genre, locaties.Location " +
+                                        "FROM `boeken` " +
+                                        "LEFT JOIN isbn " +
+                                        "ON boeken.ISBN = isbn.ISBN " +
+                                        "LEFT JOIN genres " +
+                                        "ON isbn.Genre = genres.ID " +
+                                        "LEFT JOIN locaties " +
+                                        "ON boeken.Location = locaties.ID " +
+                                        "WHERE boeken.ID = ?";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var readCommand = new MySqlCommand(readStatement, empConnection))
+                {
+                    readCommand.Parameters.Add("ID", MySqlDbType.VarChar).Value = ID;
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        using (var myDataReader = readCommand.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                list.Add((myDataReader[0] == DBNull.Value ? "?" : myDataReader.GetString(0)));
+                                list.Add((myDataReader[1] == DBNull.Value ? "?" : myDataReader.GetString(1)));
+                                list.Add((myDataReader[2] == DBNull.Value ? "?" : myDataReader.GetString(2)));
+                                list.Add((myDataReader[3] == DBNull.Value ? "?" : myDataReader.GetString(3)));
+                            }
+                        }
+                    }
+                    catch (MySqlException)
+                    {
+                        return list;
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return list;        
+        }
+
         public static List<String> GetAllBooks() {
             var list = new List<String>();
 
